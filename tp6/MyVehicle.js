@@ -13,90 +13,153 @@ class MyVehicle extends CGFobject
 		this.pyramid = new MyPyramid (this.scene, 0, 1, 0, 1);
 		this.rim = new MyDisc (this.scene, 20);
 		this.frontMirror = new MyTrapezium (this.scene, 0, 1, 0, 1);
-		this.pyramid.initBuffers();
-		this.body.initBuffers();
+		this.hood = new MyTrapezium (this.scene, 0, 1, 0, 1);
+	    this.back = new MyTrapezium (this.scene, 0, 1, 0, 1);
+	    this.stopLamp = new MyLamp(this.scene, 20,20); 
 	};
     
     display()
     {
+		//largura = 2.5
+		//comprimento = 4
+		//diametro das rodas = 1
+		//distancia entre eixos = 2
+		//altura = 2
+
+    	//comprimento corpo = 3
+    	//largura corpo = 1.5
+    	//altura corpo = 1
+
+    	//diametro roda = 1
+    	//espessura roda = 0.5
+
+    	//altura espelho = 0.5
+
+    	//comprimento capô = 0.5
+
+    	//comprimento back = 0.5
+
         //body
         this.scene.pushMatrix();
         this.scene.bodyTexture.apply();
-        this.scene.translate (0,1,0);
-        this.scene.scale (4, 2,6);
+        this.scene.translate (0,0.5,0);
+        this.scene.scale (1.5,1,3);
         this.body.display();
         this.scene.popMatrix();
 
         //roda traseira esquerda
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
-        this.scene.translate (2,0,-3);
+        this.scene.translate (0.75,0,-1);
       	this.scene.rotate(90 * Math.PI/180.0,0,1,0);
+      	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
-		
+	
 		//jante traseira esquerda
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
-		this.scene.translate (2, 0, -3);
+		this.scene.translate (0.75, 0, -1);
 		this.scene.rotate(90 * Math.PI/180.0,0,1,0);
+      	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
 
        //roda dianteira esquerda
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
-        this.scene.translate (2,0,3);
+        this.scene.translate (0.75,0, 1);
       	this.scene.rotate(90 * Math.PI/180.0,0,1,0);
+      	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
 
 		//jante dianteira esquerda
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
-		this.scene.translate (2, 0, 3);
+		this.scene.translate (0.75, 0, 1);
 		this.scene.rotate(90 * Math.PI/180.0,0,1,0);
+      	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
 
         //roda dianteira direita
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
-        this.scene.translate (-2,0,3);
+        this.scene.translate (-0.75,0, 1);
       	this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
+      	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
 
         //jante dianteira direita
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
-		this.scene.translate (-2, 0, 3);
+		this.scene.translate (-0.75, 0, 1);
 		this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
+      	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
 
         //roda traseira direita
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
-        this.scene.translate (-2,0,-3);
+        this.scene.translate (-0.75,0,-1);
       	this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
+      	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
 
        	//jante traseira esquerda
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
-		this.scene.translate (-2, 0, -3);
+		this.scene.translate (-0.75, 0, -1);
 		this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
+      	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
 
 		//espelho da frente
         this.scene.pushMatrix();
-		this.scene.translate (0, 2.1, 2.2);
-		this.scene.scale (4, 1,1.5);
+		this.scene.translate (0, 1.05,1.125);
+		this.scene.scale (1.5, 0.4,0.75); //altura default do trapézio é 1.2
 		this.scene.mirrorTexture.apply();
 		this.frontMirror.display();
         this.scene.popMatrix();
+
+        //capô
+        this.scene.pushMatrix();
+        this.scene.translate (0, 0.1,1.75);
+        this.scene.scale (1.5, 0.8, 0.5); 
+        this.scene.bodyTexture.apply();
+        this.hood.display();
+        this.scene.popMatrix();
+
+		//traseira
+		this.scene.pushMatrix();
+        this.scene.translate (0, 0.1,-1.75);
+        this.scene.rotate(180 * Math.PI/180.0,0,1,0);
+        this.scene.scale (1.5, 0.8, 0.5); 
+        this.scene.bodyTexture.apply();
+        this.back.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+		this.scene.translate(0.5,0.4,-2);
+        this.scene.rotate(180*Math.PI/180.0,0,1,0);
+        this.scene.scale(0.1,0.1,0.1);
+        this.scene.stopLampTexture.apply();
+        this.stopLamp.display();
+        this.scene.popMatrix();
+        
+        this.scene.pushMatrix();
+		this.scene.translate(-0.5,0.4,-2);
+        this.scene.rotate(180*Math.PI/180.0,0,1,0);
+        this.scene.scale(0.1,0.1,0.1);
+        this.scene.stopLampTexture.apply();
+        this.stopLamp.display();
+        this.scene.popMatrix();
+
+        
     };
 };

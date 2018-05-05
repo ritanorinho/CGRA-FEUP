@@ -20,14 +20,18 @@ class LightingScene extends CGFscene
 		this.initCameras();
 
 		this.initLights();
-
-		this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+		this.axisOn=true; 
+		this.option2=false;
+	 	this.speed=3;
+	 	
+		this.gl.clearColor(0, 0.5, 1.0, 1.0);
 		this.gl.clearDepth(100.0);
 		this.gl.enable(this.gl.DEPTH_TEST);
 		this.gl.enable(this.gl.CULL_FACE);
 		this.gl.depthFunc(this.gl.LEQUAL);
 
 		this.axis = new CGFaxis(this);
+		this.cube = new MyUnitCubeQuad (this);
 		this.prism = new MyPrism(this,6,1000);
 		this.cylinder = new MyCylinder (this,20,20);
 //		this.clock = new MyClock(this);
@@ -36,7 +40,7 @@ class LightingScene extends CGFscene
 		this.pyramid = new MyPyramid (this);
 		this.trapezium = new MyTrapezium (this,0,1,0,1);
 		this.car = new MyVehicle (this);
-
+		this.terrain= new Plane(this,50,0,1,0,1);
 		// Scene elements
 		this.table = new MyTable(this);
 		this.wall = new MyQuad(this,-0.5,1.5,-0.5,1.5);
@@ -45,7 +49,6 @@ class LightingScene extends CGFscene
 
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS,0,1,0,1);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS,0,1,0,1);
-
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 		
@@ -85,6 +88,10 @@ class LightingScene extends CGFscene
 		this.windowAppearance.loadTexture ("../resources/images/window.png");
 		this.windowAppearance.setTextureWrap ('CLAMP_TO_EDGE' ,'CLAMP_TO_EDGE')
 	
+		this.skyAppearance = new CGFappearance(this);
+		this.skyAppearance.loadTexture("../resources/images/blue.png");
+		//this.skyAppearance.setTextureWrap('REPEAT','REPEAT');
+
 		this.slidesAppearance = new CGFappearance (this);
 		this.slidesAppearance.loadTexture ("../resources/images/slides.png");
 		this.slidesAppearance.setTextureWrap ('CLAMP_TO_EDGE' ,'CLAMP_TO_EDGE')
@@ -114,6 +121,9 @@ class LightingScene extends CGFscene
 
 		this.mirrorTexture = new CGFappearance (this);
 		this.mirrorTexture.loadTexture ("../resources/images/mirror.png");
+		
+		this.stopLampTexture= new CGFappearance(this);
+		this.stopLampTexture.loadTexture("../resources/images/stop.png");
 		
 		this.setUpdatePeriod(100);
 	};
@@ -195,7 +205,7 @@ class LightingScene extends CGFscene
 		this.updateLights();
 
 		// Draw axis
-		this.axis.display();
+		if (this.axisOn)	this.axis.display();
 		//this.prism.display();
 		//this.cylinder.display();
 		//this.lamp.display();
@@ -247,12 +257,12 @@ class LightingScene extends CGFscene
 		// // Board A
 		 this.pushMatrix();
 		 this.translate(4, 4.5, 0.2);
-		 this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);	
+		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);	
 		 this.slidesAppearance.apply();
 		 this.boardA.display();
 		 this.popMatrix();
 
-		 // Board B
+	 // Board B
 		 this.pushMatrix();
 		 this.translate(10.5, 4.5, 0.2);
 		 this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);	
@@ -262,13 +272,24 @@ class LightingScene extends CGFscene
 		this.clock.display();*/
 //		this.slidesAppearance.apply();
 //		this.cylinder.display();
+//		this.translate (1,0,0);
+//		this.cube.display ();
 //		this.lamp.display();
 //		this.pyramid.display();
 //		this.trapezium.display();
 		this.car.display();
 		// ---- END Scene drawing section
-	};
-
+		 this.pushMatrix();
+		 this.rotate(-90*Math.PI/180.0,1,0,0);
+		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);	
+		 this.skyAppearance.apply();
+		 this.terrain.display();
+		 this.popMatrix();
+		};
+	doSomething()
+	{ 
+		console.log("Doing something..."); 
+	}
 	update (currentTime)
 	{
 //		this.clock.update (currentTime);
