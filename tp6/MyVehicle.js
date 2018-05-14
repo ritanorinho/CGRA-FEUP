@@ -21,12 +21,12 @@ class MyVehicle extends CGFobject
     display()
     {
 		//largura = 2.5
-		//comprimento = 4
+		//comprimento = 4.5 (sem farois)
 		//diametro das rodas = 1
 		//distancia entre eixos = 2
 		//altura = 2
 
-    	//comprimento corpo = 3
+    	//comprimento corpo = 4
     	//largura corpo = 1.5
     	//altura corpo = 1
 
@@ -43,14 +43,14 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
         this.scene.bodyTexture.apply();
         this.scene.translate (0,0.5,0);
-        this.scene.scale (1.5,1,3);
+        this.scene.scale (1.5,1,4);
         this.body.display();
         this.scene.popMatrix();
 
         //roda traseira esquerda
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
-        this.scene.translate (0.75,0,-1);
+        this.scene.translate (0.75,0,-1.25);
       	this.scene.rotate(90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
@@ -59,7 +59,7 @@ class MyVehicle extends CGFobject
 		//jante traseira esquerda
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
-		this.scene.translate (0.75, 0, -1);
+		this.scene.translate (0.75, 0, -1.25);
 		this.scene.rotate(90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
@@ -68,7 +68,7 @@ class MyVehicle extends CGFobject
        //roda dianteira esquerda
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
-        this.scene.translate (0.75,0, 1);
+        this.scene.translate (0.75,0, 1.25);
       	this.scene.rotate(90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
@@ -77,7 +77,7 @@ class MyVehicle extends CGFobject
 		//jante dianteira esquerda
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
-		this.scene.translate (0.75, 0, 1);
+		this.scene.translate (0.75, 0, 1.25);
 		this.scene.rotate(90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
@@ -95,7 +95,7 @@ class MyVehicle extends CGFobject
         //jante dianteira direita
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
-		this.scene.translate (-0.75, 0, 1);
+		this.scene.translate (-0.75, 0, 1.25);
 		this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
@@ -104,7 +104,7 @@ class MyVehicle extends CGFobject
         //roda traseira direita
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
-        this.scene.translate (-0.75,0,-1);
+        this.scene.translate (-0.75,0,-1.25);
       	this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
@@ -113,7 +113,7 @@ class MyVehicle extends CGFobject
        	//jante traseira esquerda
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
-		this.scene.translate (-0.75, 0, -1);
+		this.scene.translate (-0.75, 0, -1.25);
 		this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
@@ -121,7 +121,7 @@ class MyVehicle extends CGFobject
 
 		//espelho da frente
         this.scene.pushMatrix();
-		this.scene.translate (0, 1.05,1.125);
+		this.scene.translate (0, 1.05,1.6);
 		this.scene.scale (1.5, 0.4,0.75); //altura default do trapézio é 1.2
 		this.scene.mirrorTexture.apply();
 		this.frontMirror.display();
@@ -129,21 +129,22 @@ class MyVehicle extends CGFobject
 
         //capô
         this.scene.pushMatrix();
-        this.scene.translate (0, 0.1,1.75);
+        this.scene.translate (0, 0.1,2.25);
         this.scene.scale (1.5, 0.8, 0.5); 
         this.scene.bodyTexture.apply();
         this.hood.display();
         this.scene.popMatrix();
 
 		//traseira
-		this.scene.pushMatrix();
+/*		this.scene.pushMatrix();
         this.scene.translate (0, 0.1,-1.75);
         this.scene.rotate(180 * Math.PI/180.0,0,1,0);
         this.scene.scale (1.5, 0.8, 0.5); 
         this.scene.bodyTexture.apply();
         this.back.display();
-        this.scene.popMatrix();
+        this.scene.popMatrix();*/
 
+		//farol esquerdo
         this.scene.pushMatrix();
 		this.scene.translate(0.5,0.4,-2);
         this.scene.rotate(180*Math.PI/180.0,0,1,0);
@@ -152,6 +153,7 @@ class MyVehicle extends CGFobject
         this.stopLamp.display();
         this.scene.popMatrix();
         
+        //farol direito
         this.scene.pushMatrix();
 		this.scene.translate(-0.5,0.4,-2);
         this.scene.rotate(180*Math.PI/180.0,0,1,0);
