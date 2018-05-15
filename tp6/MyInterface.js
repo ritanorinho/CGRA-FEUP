@@ -47,7 +47,7 @@ class MyInterface extends CGFinterface {
 		// this.speed=3;
 		// min and max values can be specified as parameters
 
-	//	this.gui.add(this.scene, 'speed', -5, 5);
+		this.gui.add(this.scene, 'speed', -5, 5);
 		var groupLights = this.gui.addFolder("Lights");
 		groupLights.open();
 		groupLights.add(this.scene,'light0');
@@ -55,7 +55,7 @@ class MyInterface extends CGFinterface {
 		groupLights.add(this.scene,'light2');
 		groupLights.add(this.scene,'light3');
 
-
+		this.initKeys();
 		return true;
 	};
 
@@ -77,4 +77,21 @@ class MyInterface extends CGFinterface {
 				console.log("Key 'A' pressed");
 		};
 	};
+
+	initKeys() {
+		this.scene.gui=this;
+		this.processKeyboard=function(){};
+		this.activeKeys={};
+	};
+	processKeyDown(event) {
+	this.activeKeys[event.code]=true;
+	};
+	processKeyUp(event) {
+	this.activeKeys[event.code]=false;
+		};
+	isKeyPressed(keyCode) {
+	return this.activeKeys[keyCode] || false;
+		};
+
+
 };

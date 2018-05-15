@@ -30,7 +30,7 @@ class LightingScene extends CGFscene
 		this.light1=true;
 		this.light2=true;
 		this.light3=true;
-		
+
 		this.gl.clearColor(0, 0.5, 1.0, 1.0);
 		this.gl.clearDepth(100.0);
 		this.gl.enable(this.gl.DEPTH_TEST);
@@ -208,6 +208,23 @@ class LightingScene extends CGFscene
 	else
 		this.lights[3].disable();
 	}
+	checkKeys()
+	{
+	var text="Keys pressed: ";
+	var keysPressed=false;
+	if (this.gui.isKeyPressed("KeyW"))
+	{
+		text+=" W ";
+		keysPressed=true;
+	}
+	if (this.gui.isKeyPressed("KeyS"))
+	{
+		text+=" S ";
+		keysPressed=true;
+	}
+	if (keysPressed)
+		console.log(text);
+	}
 
 
 	display() 
@@ -315,6 +332,7 @@ class LightingScene extends CGFscene
 	}
 	update (currentTime)
 	{
+		this.checkKeys();
 //		this.clock.update (currentTime);
 	}
 };
