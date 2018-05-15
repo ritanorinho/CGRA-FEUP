@@ -53,6 +53,10 @@ class LightingScene extends CGFscene
 		this.wall = new MyQuad(this,-0.5,1.5,-0.5,1.5);
 		this.floor = new MyQuad(this, 0, 10, 0, 12);
 		
+		this.wPress = false;
+		this.sPress = false;
+		this.aPress = false;
+		this.dPress = false;
 
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS,0,1,0,1);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS,0,1,0,1);
@@ -208,23 +212,27 @@ class LightingScene extends CGFscene
 	else
 		this.lights[3].disable();
 	}
+
 	checkKeys()
 	{
-	var text="Keys pressed: ";
-	var keysPressed=false;
+		this.wPress = false;
+		this.sPress = false;
+		this.aPress = false;
+		this.dPress = false;
 	if (this.gui.isKeyPressed("KeyW"))
 	{
-		text+=" W ";
-		keysPressed=true;
+		this.wPress = true;
 	}
 	if (this.gui.isKeyPressed("KeyS"))
 	{
-		text+=" S ";
-		keysPressed=true;
+		this.sPress = true;
 	}
-	if (keysPressed)
-		console.log(text);
+	if (this.gui.isKeyPressed("KeyA"))
+	{
+		this.aPress = true;
 	}
+	}
+
 
 
 	display() 
@@ -317,7 +325,10 @@ class LightingScene extends CGFscene
 //		this.lamp.display();
 //		this.pyramid.display();
 //		this.trapezium.display();
+		this.pushMatrix();
+		this.translate (0, 0.5, 2);
 		this.car.display();
+		this.popMatrix();
 		// ---- END Scene drawing section
 		 this.pushMatrix();
 		 this.rotate(-90*Math.PI/180.0,1,0,0);
@@ -333,6 +344,7 @@ class LightingScene extends CGFscene
 	update (currentTime)
 	{
 		this.checkKeys();
+		this.car.update(currentTime, this.speed, this.wPress, this.sPress, this.aPress, this.dPress);
 //		this.clock.update (currentTime);
 	}
 };

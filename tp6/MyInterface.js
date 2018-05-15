@@ -9,8 +9,7 @@ class MyInterface extends CGFinterface {
  		super();
  	}
 	
-	/**
-	 * init
+	 /* init
 	 * @param {CGFapplication} application
 	 */
 	init(application) {
@@ -92,6 +91,7 @@ class MyInterface extends CGFinterface {
 	isKeyPressed(keyCode) {
 	return this.activeKeys[keyCode] || false;
 		};
+	
 
 
 };
