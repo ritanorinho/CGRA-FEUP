@@ -15,15 +15,22 @@ class LightingScene extends CGFscene
  
 	init(application) 
 	{
+
 		super.init(application);
 
 		this.initCameras();
 
-		this.initLights();
+	 	this.initLights();
+	 	
 		this.axisOn=true; 
 		this.option2=false;
-	 	this.speed=3;
-	 	
+
+		this.speed=3;
+		this.light0=true;
+		this.light1=true;
+		this.light2=true;
+		this.light3=true;
+		
 		this.gl.clearColor(0, 0.5, 1.0, 1.0);
 		this.gl.clearDepth(100.0);
 		this.gl.enable(this.gl.DEPTH_TEST);
@@ -139,36 +146,34 @@ class LightingScene extends CGFscene
 		this.setGlobalAmbientLight(0,0,0,1);
 		
 		// Positions for four lights
+		
 		this.lights[0].setPosition(4, 2, -2, 1);
 		this.lights[0].setVisible(true); // show marker on light position (different from enabled)
-		
-		this.lights[1].setPosition(-5, -1.0, 0, 1.0);
-		this.lights[1].setVisible(true); // show marker on light position (different from enabled)
-
-		this.lights[2].setPosition (0, 1.0, 3.0, 1.0);
-		this.lights[2].setVisible(true);
-
-		//this.lights[1].setVisible(true); // show marker on light position (different from enabled)
-		this.lights[3].setPosition(0, 6, 0, 1.0);
-		this.lights[3].setVisible(true); // show marker on light position (different from enabled)
-
 		this.lights[0].setAmbient(0, 0, 0, 1);
 		this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[0].setSpecular (1,1,0,1);
 		this.lights[0].enable();
+	
 
+		this.lights[1].setPosition(-5, -1.0, 0, 1.0);
+		this.lights[1].setVisible(true); // show marker on light position (different from enabled)
 		this.lights[1].setAmbient(0, 0, 0, 1);
 		this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[1].enable();
-		
-		
+
+		this.lights[2].setPosition (0, 1.0, 3.0, 1.0);
+		this.lights[2].setVisible(true);
 		this.lights[2].setAmbient(0, 0, 0, 1);
 		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[2].setSpecular (1,1,1,1);
 		this.lights[2].setConstantAttenuation(1);
 		this.lights[2].setLinearAttenuation (1);
 		this.lights[2].setQuadraticAttenuation (0);
-		this.lights[2].enable();
+		 this.lights[2].enable();
+
+		//this.lights[1].setVisible(true); // show marker on light position (different from enabled)
+		this.lights[3].setPosition(0, 6, 0, 1.0);
+		this.lights[3].setVisible(true); // show marker on light position (different from enabled)	
 	
 		this.lights[3].setAmbient(0, 0, 0, 1);
 		this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -183,6 +188,25 @@ class LightingScene extends CGFscene
 	{
 		for (var i = 0; i < this.lights.length; i++)
 			this.lights[i].update();
+	if (this.light0)
+		this.lights[0].enable();
+	else
+		this.lights[0].disable();
+		
+	if (this.light1)
+		this.lights[1].enable();
+	else
+		this.lights[1].disable();
+	
+	if (this.light2)
+		this.lights[2].enable();
+	else
+		this.lights[2].disable();
+			
+	if (this.light3)
+		this.lights[3].enable();
+	else
+		this.lights[3].disable();
 	}
 
 
@@ -202,8 +226,7 @@ class LightingScene extends CGFscene
 		this.applyViewMatrix();
 
 		// // Update all lights used
-		this.updateLights();
-
+			this.updateLights();
 		// Draw axis
 		if (this.axisOn)	this.axis.display();
 		//this.prism.display();

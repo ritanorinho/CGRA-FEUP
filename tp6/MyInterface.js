@@ -40,12 +40,21 @@ class MyInterface extends CGFinterface {
 		group.add(this.scene, 'axisOn');
 		group.add(this.scene, 'option2');
 
+		
+
 		// add a slider
 		// must be a numeric variable of the scene, initialized in scene.init e.g.
 		// this.speed=3;
 		// min and max values can be specified as parameters
 
-		this.gui.add(this.scene, 'speed', -5, 5);
+	//	this.gui.add(this.scene, 'speed', -5, 5);
+		var groupLights = this.gui.addFolder("Lights");
+		groupLights.open();
+		groupLights.add(this.scene,'light0');
+		groupLights.add(this.scene,'light1');
+		groupLights.add(this.scene,'light2');
+		groupLights.add(this.scene,'light3');
+
 
 		return true;
 	};
