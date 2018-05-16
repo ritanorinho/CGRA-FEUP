@@ -45,12 +45,16 @@ class MyVehicle extends CGFobject
     	//comprimento capô = 0.5
 
     	//comprimento back = 0.5
+    	this.scene.pushMatrix();
+    	this.scene.translate (this.x,0,this.z);     
+		this.scene.rotate (this.rotationAngle * Math.PI/180,0,1,0);
+     	this.scene.translate (-this.x,0,-this.z);
 
         //body
         this.scene.pushMatrix();
         this.scene.bodyTexture.apply();
         this.scene.translate (this.x,0.5,this.z);
-        this.scene.rotate (this.rotationAngle * Math.PI/180,0,1,0);
+     //   this.scene.rotate (this.rotationAngle * Math.PI/180,0,1,0);
         this.scene.scale (1.5,1,4);
         this.body.display();
         this.scene.popMatrix();
@@ -59,7 +63,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
         this.scene.translate (this.x+0.75,0,this.z-1.25);
-      	this.scene.rotate((this.rotationAngle + 90) * Math.PI/180.0,0,1,0);
+      	this.scene.rotate( 90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
@@ -68,7 +72,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
 		this.scene.translate (this.x+0.75, 0, this.z-1.25);
-		this.scene.rotate((this.rotationAngle + 90) * Math.PI/180.0,0,1,0);
+		this.scene.rotate(90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
@@ -77,7 +81,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
         this.scene.translate (this.x+0.75,0, this.z+1.25);
-      	this.scene.rotate((this.rotationAngle + 90) * Math.PI/180.0,0,1,0);
+      	this.scene.rotate(90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
@@ -86,7 +90,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
 		this.scene.translate (this.x+0.75, 0, this.z+1.25);
-		this.scene.rotate((this.rotationAngle + 90) * Math.PI/180.0,0,1,0);
+		this.scene.rotate(90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
@@ -95,7 +99,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
         this.scene.translate (this.x-0.75,0, this.z+1.25);
-      	this.scene.rotate((this.rotationAngle - 90) * Math.PI/180.0,0,1,0);
+      	this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
@@ -104,7 +108,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
 		this.scene.translate (this.x-0.75, 0, this.z+1.25);
-		this.scene.rotate((this.rotationAngle - 90) * Math.PI/180.0,0,1,0);
+		this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
@@ -113,7 +117,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
         this.scene.translate (this.x-0.75,0,this.z-1.25);
-      	this.scene.rotate((this.rotationAngle - 90) * Math.PI/180.0,0,1,0);
+      	this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
@@ -122,7 +126,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
 		this.scene.translate (this.x-0.75, 0, this.z-1.25);
-		this.scene.rotate((this.rotationAngle - 90) * Math.PI/180.0,0,1,0);
+		this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
@@ -131,7 +135,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
 		this.scene.translate (this.x, 1.05,this.z+1.6);
 		this.scene.scale (1.5, 0.4,0.75); //altura default do trapézio é 1.2
-		this.scene.rotate((this.rotationAngle) * Math.PI/180.0,0,1,0);
+	//	this.scene.rotate((this.rotationAngle) * Math.PI/180.0,0,1,0);
 		this.scene.mirrorTexture.apply();
 		this.frontMirror.display();
         this.scene.popMatrix();
@@ -156,7 +160,7 @@ class MyVehicle extends CGFobject
 		//farol esquerdo
         this.scene.pushMatrix();
 		this.scene.translate(this.x+0.5,0.4,this.z-2);
-        this.scene.rotate((this.rotationAngle+180)*Math.PI/180.0,0,1,0);
+        this.scene.rotate(180*Math.PI/180.0,0,1,0);
         this.scene.scale(0.1,0.1,0.1);
         this.scene.stopLampTexture.apply();
         this.stopLamp.display();
@@ -165,12 +169,13 @@ class MyVehicle extends CGFobject
         //farol direito
         this.scene.pushMatrix();
 		this.scene.translate(this.x-0.5,0.4,this.z-2);
-        this.scene.rotate((this.rotationAngle+180)*Math.PI/180.0,0,1,0);
+        this.scene.rotate(180*Math.PI/180.0,0,1,0);
         this.scene.scale(0.1,0.1,0.1);
         this.scene.stopLampTexture.apply();
         this.stopLamp.display();
         this.scene.popMatrix();
-
+		
+		this.scene.popMatrix();
         
     };
 
@@ -198,14 +203,15 @@ class MyVehicle extends CGFobject
 		if (sPress)
 		{
 			this.z = this.z - diff * speed * Math.sin(this.angle);
-			this.x = this.x + diff * speed * Math.cos(this.angle); 
+			this.x = this.x - diff * speed * Math.cos(this.angle); 
 		}
 
-		if (aPress)
+		if ((wPress || sPress) && aPress)
 		{
 			this.rotationAngle += 5;
+			this.angle -= Math.PI/20;
 		}
-		if (dPress)
+		if ((wPress || sPress)&& dPress)
 		{
 			this.rotationAngle -= 5;
 		}
