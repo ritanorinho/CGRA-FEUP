@@ -231,6 +231,8 @@ class LightingScene extends CGFscene
 	{
 		this.aPress = true;
 	}
+	if (this.gui.isKeyPressed("KeyD"))
+		this.dPress=true;
 	}
 
 

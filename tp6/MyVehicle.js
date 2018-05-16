@@ -131,6 +131,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
 		this.scene.translate (this.x, 1.05,this.z+1.6);
 		this.scene.scale (1.5, 0.4,0.75); //altura default do trapézio é 1.2
+		this.scene.rotate((this.rotationAngle) * Math.PI/180.0,0,1,0);
 		this.scene.mirrorTexture.apply();
 		this.frontMirror.display();
         this.scene.popMatrix();
@@ -155,7 +156,7 @@ class MyVehicle extends CGFobject
 		//farol esquerdo
         this.scene.pushMatrix();
 		this.scene.translate(this.x+0.5,0.4,this.z-2);
-        this.scene.rotate(180*Math.PI/180.0,0,1,0);
+        this.scene.rotate((this.rotationAngle+180)*Math.PI/180.0,0,1,0);
         this.scene.scale(0.1,0.1,0.1);
         this.scene.stopLampTexture.apply();
         this.stopLamp.display();
@@ -164,7 +165,7 @@ class MyVehicle extends CGFobject
         //farol direito
         this.scene.pushMatrix();
 		this.scene.translate(this.x-0.5,0.4,this.z-2);
-        this.scene.rotate(180*Math.PI/180.0,0,1,0);
+        this.scene.rotate((this.rotationAngle+180)*Math.PI/180.0,0,1,0);
         this.scene.scale(0.1,0.1,0.1);
         this.scene.stopLampTexture.apply();
         this.stopLamp.display();
@@ -203,6 +204,10 @@ class MyVehicle extends CGFobject
 		if (aPress)
 		{
 			this.rotationAngle += 5;
+		}
+		if (dPress)
+		{
+			this.rotationAngle -= 5;
 		}
     }
 };
