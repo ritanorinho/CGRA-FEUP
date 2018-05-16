@@ -83,6 +83,11 @@ class MyInterface extends CGFinterface {
 		this.activeKeys={};
 	};
 	processKeyDown(event) {
+		/*switch(event.keyCode){
+			case 83: // S
+				
+			case 87: // W
+		}*/
 	this.activeKeys[event.code]=true;
 	};
 	processKeyUp(event) {
