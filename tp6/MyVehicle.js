@@ -196,14 +196,14 @@ class MyVehicle extends CGFobject
 	
 		if (wPress)
 		{
-			this.z = this.z + diff * speed * Math.sin(this.angle);
-			this.x = this.x + diff * speed * Math.cos(this.angle); 
+			this.z = this.z + diff * speed * Math.sin((90 - this.rotationAngle) * Math.PI/180);
+			this.x = this.x + diff * speed * Math.cos((90 - this.rotationAngle) * Math.PI/180); 
 		}
 
 		if (sPress)
 		{
-			this.z = this.z - diff * speed * Math.sin(this.angle);
-			this.x = this.x - diff * speed * Math.cos(this.angle); 
+			this.z = this.z - diff * speed * Math.sin ((90 - this.rotationAngle) * Math.PI/180);
+			this.x = this.x - diff * speed * Math.cos ((90 - this.rotationAngle) * Math.PI/180);
 		}
 
 		if ((wPress || sPress) && aPress)
