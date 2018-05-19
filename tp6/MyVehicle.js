@@ -212,28 +212,28 @@ class MyVehicle extends CGFobject
 
 		if ((wPress || sPress) && aPress)
 		{
-			this.rotationAngle += 5+this.wheelRotation;
+			this.rotationAngle += 5;
 			this.wheelRotation=0;
 			this.angle -= Math.PI/20;
 		}
 		if ((wPress || sPress)&& dPress)
 		{
-			this.rotationAngle -= 5+this.wheelRotation;
+			this.rotationAngle -= 5;
 			this.wheelRotation=0;
 		}
 		if (aPress && !(wPress && sPress) && this.wheelRotation<45 && this.wheelRotation>= -45)
 		{
 			this.wheelRotation+=5;
 		}
-		console.log(this.wheelRotation);
+		
 		if (dPress && !(wPress && sPress)){
-				console.log("dPress");
+				
 		if( this.wheelRotation<=45 && this.wheelRotation> -45)
 		{
 
 			this.wheelRotation-=5;
 		}
-		console.log(this.wheelRotation);
+		
 		}
     }
     };
