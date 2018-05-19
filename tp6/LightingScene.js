@@ -23,7 +23,7 @@ class LightingScene extends CGFscene
 	 	this.initLights();
 	 	
 		this.axisOn=true; 
-		this.option2=false;
+		//this.option2=false;
 
 		this.speed=3;
 		this.light0=true;

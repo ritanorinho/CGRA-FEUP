@@ -37,7 +37,7 @@ class MyInterface extends CGFinterface {
 		// e.g. this.option1=true; this.option2=false;
 
 		group.add(this.scene, 'axisOn');
-		group.add(this.scene, 'option2');
+		//group.add(this.scene, 'option2');
 
 		
 
