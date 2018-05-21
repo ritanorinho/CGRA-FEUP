@@ -14,7 +14,7 @@ class Plane extends CGFobject{
 		nrDivs = typeof nrDivs !== 'undefined' ? nrDivs : 1;
 
 		this.nrDivs = nrDivs;
-		this.patchLength = 1.0 / nrDivs;
+		this.patchLength = 5.0 / nrDivs;
 
 		this.initBuffers();
 	};
@@ -67,7 +67,7 @@ class Plane extends CGFobject{
 			}
 			yCoord -= this.patchLength;
 		}
-		
+				
 		// Generating indices
 		/* for nrDivs = 3 output will be 
 			[

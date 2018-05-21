@@ -40,7 +40,8 @@ class LightingScene extends CGFscene
 		this.axis = new CGFaxis(this);
 		
 		//example for nrDivs = 8 -> grid of 9x9 vertices
-		this.altimetry= [[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3 ],
+		this.altimetry= [
+		[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3 ],
 		[ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3 ],
 		[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
 		[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
@@ -225,13 +226,13 @@ class LightingScene extends CGFscene
 		this.pushMatrix();
 		this.translate (0, 0.5, 2);
 		this.vehicleAppearances[this.currVehicleAppearance].apply()
-	//	this.car.display();
+		this.car.display();
 		this.popMatrix();
 
 		this.pushMatrix();
 		this.rotate(-90*Math.PI/180.0,1,0,0);
 		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);	
-	//	this.skyAppearance.apply();
+		this.skyAppearance.apply();
 		this.terrain.display();
 		this.popMatrix();
 		};
