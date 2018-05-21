@@ -91,7 +91,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
 		this.scene.translate (this.x+0.75, 0, this.z+1.25);
-		this.scene.rotate((this.wheelRotation+90) * Math.PI/180.0,0,1,0);
+		this.scene.rotate ((this.wheelRotation+90) * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
@@ -206,7 +206,7 @@ class MyVehicle extends CGFobject
 		{
 			this.z = this.z - diff * speed * Math.sin ((90 - this.rotationAngle) * Math.PI/180);
 			this.x = this.x - diff * speed * Math.cos ((90 - this.rotationAngle) * Math.PI/180);
-			this.rotationAngle +=this.wheelRotation/20;
+			this.rotationAngle -=this.wheelRotation/20;
 		
 		}
 
@@ -216,11 +216,13 @@ class MyVehicle extends CGFobject
 			this.wheelRotation=0;
 			this.angle -= Math.PI/20;
 		}
+
 		if ((wPress || sPress)&& dPress)
 		{
 			this.rotationAngle -= 5;
 			this.wheelRotation=0;
 		}
+
 		if (aPress && !(wPress && sPress) && this.wheelRotation<45 && this.wheelRotation>= -45)
 		{
 			this.wheelRotation+=5;
