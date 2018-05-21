@@ -15,6 +15,7 @@ class MyVehicle extends CGFobject
 		this.rotationAngle = 0;
 		this.wheelRotation=0;
 		this.lastTime = 0;
+		this.bodyTexture = this.scene.carBlueTexture;
 
 		this.wheel = new MyCylinder (this.scene,20,20);
 		this.body = new MyUnitCubeQuad (this.scene, 0, 1, 0, 1);
@@ -46,6 +47,10 @@ class MyVehicle extends CGFobject
     	//comprimento capô = 0.5
 
     	//comprimento back = 0.5
+
+//		this.bodyTexture = this.scene.carBlueTexture;
+
+
     	this.scene.pushMatrix();
     	this.scene.translate (this.x,0,this.z);     
 		this.scene.rotate ((this.rotationAngle) * Math.PI/180,0,1,0);
@@ -53,13 +58,21 @@ class MyVehicle extends CGFobject
 
         //body
         this.scene.pushMatrix();
-        this.scene.bodyTexture.apply();
+//        this.bodyTexture.apply();
         this.scene.translate (this.x,0.5,this.z);
      //   this.scene.rotate (this.rotationAngle * Math.PI/180,0,1,0);
         this.scene.scale (1.5,1,4);
         this.body.display();
         this.scene.popMatrix();
 
+        //capô
+        this.scene.pushMatrix();
+        this.scene.translate (this.x, 0.1,this.z+2.25);
+        this.scene.scale (1.5, 0.8, 0.5); 
+ //       this.bodyTexture.apply();
+        this.hood.display();
+        this.scene.popMatrix();
+        
         //roda traseira esquerda
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
@@ -141,14 +154,6 @@ class MyVehicle extends CGFobject
 		this.frontMirror.display();
         this.scene.popMatrix();
 
-        //capô
-        this.scene.pushMatrix();
-        this.scene.translate (this.x, 0.1,this.z+2.25);
-        this.scene.scale (1.5, 0.8, 0.5); 
-        this.scene.bodyTexture.apply();
-        this.hood.display();
-        this.scene.popMatrix();
-
 		//traseira
 /*		this.scene.pushMatrix();
         this.scene.translate (0, 0.1,-1.75);
@@ -217,25 +222,30 @@ class MyVehicle extends CGFobject
 			this.angle -= Math.PI/20;
 		}
 
-		if ((wPress || sPress)&& dPress)
+		if ((wPress || sPress) &&  dPress)
 		{
 			this.rotationAngle -= 5;
 			this.wheelRotation=0;
 		}
 
-		if (aPress && !(wPress && sPress) && this.wheelRotation<45 && this.wheelRotation>= -45)
+		if (aPress && !(wPress || sPress) && this.wheelRotation<45 && this.wheelRotation>= -45)
 		{
 			this.wheelRotation+=5;
 		}
 		
-		if (dPress && !(wPress && sPress)){
+		if (dPress && !(wPress || sPress)){
 				
-		if( this.wheelRotation<=45 && this.wheelRotation> -45)
-		{
+			if( this.wheelRotation<=45 && this.wheelRotation> -45)
+			{
 
-			this.wheelRotation-=5;
-		}
+				this.wheelRotation-=5;
+			}
 		
 		}
+    }
+
+    setTexture (newTexture)
+    {
+    	this.bodyTexture = newTexture;
     }
     };

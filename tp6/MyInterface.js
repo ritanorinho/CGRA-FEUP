@@ -54,6 +54,8 @@ class MyInterface extends CGFinterface {
 		groupLights.add(this.scene,'light2');
 		groupLights.add(this.scene,'light3');
 
+		this.gui.add(this.scene, 'currVehicleAppearance', { "carBlueTexture":0, "carRainbowTexture":1, "carRedTexture":2, "carGreenTexture":3, "carYellowTexture":4 } ).name("vehicleAppearanceList");
+
 		this.initKeys();
 		return true;
 	};
