@@ -41,15 +41,15 @@ class LightingScene extends CGFscene
 		
 		//example for nrDivs = 8 -> grid of 9x9 vertices
 		this.altimetry= [
-		[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3 ],
-		[ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3 ],
-		[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-		[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-		[ 0.0 , 0.0 , 2.0, 4.0, 2.5, 2.4, 0.0, 0.0 ],
-		[ 0.0 , 0.0 , 2.0, 4.0, 3.5, 2.4, 0.0, 0.0 ],
-		[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-		[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-		[ 2.0 , 3.0 , 2.0, 1.0, 2.5, 2.4, 2.3, 1.3 ]
+		[ 0.0 , 0.0 , 0.0, 4.0, 2.5, 2.4, 2.3, 2.3,0 ],
+		[ 0.0 , 0.0 , 0.0, 2.0, 7.5, 6.4, 5.5, 3.5,0 ],
+		[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 3.0,0 ],
+		[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 2.0,0 ],
+		[ 0.0 , 0.0 , 2.0, 2.0, 1.5, 0.0, 0.0, 1.0,0 ],
+		[ 1.0 , 0.0 , 2.0, 2.0, 0.5, 0.0, 0.0, 0.0,0 ],
+		[ 3.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0 ],
+		[ 4.5 , 7.0 , 3.0, 0.0, 0.0, 0.0, 0.0, 0.0,10 ],
+		[ 4.0 , 5.0 , 4.0, 1.0, 2.5, 2.4, 2.3, 1.3,0 ],
 		];
 
 		this.vehicleAppearances = new Array();
@@ -57,7 +57,8 @@ class LightingScene extends CGFscene
 
 		this.car = new MyVehicle (this);
 		this.terrain= new MyTerrain (this,8, this.altimetry);
-		
+		this.crane = new MyCrane (this);
+
 		this.wPress = false;
 		this.sPress = false;
 		this.aPress = false;
@@ -66,7 +67,7 @@ class LightingScene extends CGFscene
 		this.enableTextures(true);
 		
 		this.gardenAppearance = new CGFappearance(this);
-		this.gardenAppearance.loadTexture("../resources/images/greenGarden.jpg");
+		this.gardenAppearance.loadTexture("../resources/images/mountain.jpg");
 		
 		this.skyAppearance = new CGFappearance(this);
 		this.skyAppearance.loadTexture("../resources/images/blue.png");
@@ -96,6 +97,9 @@ class LightingScene extends CGFscene
 		this.mirrorTexture = new CGFappearance (this);
 		this.mirrorTexture.loadTexture ("../resources/images/mirror.png");
 		
+		this.metalTexture = new CGFappearance (this);
+		this.metalTexture.loadTexture  ("../resources/images/metal.jpg");
+
 		this.stopLampTexture= new CGFappearance(this);
 		this.stopLampTexture.loadTexture("../resources/images/stop.png");
 		
@@ -134,7 +138,7 @@ class LightingScene extends CGFscene
 		this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[1].enable();
 
-		this.lights[2].setPosition (0, 1.0, 3.0, 1.0);
+		this.lights[2].setPosition (5, 40.0, 5.0, 0.0);
 		this.lights[2].setVisible(true);
 		this.lights[2].setAmbient(0, 0, 0, 1);
 		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -236,8 +240,14 @@ class LightingScene extends CGFscene
 		this.rotate(-90*Math.PI/180.0,1,0,0);
 		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);	
 		this.gardenAppearance.apply();
-		this.terrain.display();
+//		this.terrain.display();
 		this.popMatrix();
+		
+		this.pushMatrix();
+		this.metalTexture.apply();
+		this.crane.display();
+		this.popMatrix();
+
 		};
 	doSomething()
 	{ 
@@ -247,6 +257,6 @@ class LightingScene extends CGFscene
 	{
 		this.checkKeys();
 		this.car.update(currentTime, this.speed, this.wPress, this.sPress, this.aPress, this.dPress);
-
+	//	this.crane.update(currentTime);
 	}
 };
