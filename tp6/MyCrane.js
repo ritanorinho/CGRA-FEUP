@@ -12,7 +12,7 @@ class MyCrane extends CGFobject
 
         this.angle = 0;
         this.lastTime = 0;
-
+		this.direction=1;
         this.base = new MyCylinderWithDiscs(this.scene);    
         this.arm = new MyCylinderWithDiscs(this.scene); 
 	    this.joint = new MyCylinderWithDiscs(this.scene);
@@ -75,7 +75,16 @@ class MyCrane extends CGFobject
 	{
 	    var diff = (currTime - this.lastTime)/1000;
 	    this.lastTime = currTime;
-	    
-            this.angle += diff * 30;
+            
+            
+           
+            if (this.angle ==180){
+            	this.direction=-1;
+            }
+            if (this.angle==0)
+            	this.direction=1;
+        //   this.angle += this.direction * diff * 30;
+        this.angle+=this.direction*3;
 	}
+	
 };

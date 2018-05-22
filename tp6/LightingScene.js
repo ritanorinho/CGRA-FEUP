@@ -257,6 +257,6 @@ class LightingScene extends CGFscene
 	{
 		this.checkKeys();
 		this.car.update(currentTime, this.speed, this.wPress, this.sPress, this.aPress, this.dPress);
-	//	this.crane.update(currentTime);
+		this.crane.update(currentTime);
 	}
 };
