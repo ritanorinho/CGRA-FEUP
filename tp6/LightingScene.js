@@ -65,6 +65,9 @@ class LightingScene extends CGFscene
 
 		this.enableTextures(true);
 		
+		this.gardenAppearance = new CGFappearance(this);
+		this.gardenAppearance.loadTexture("../resources/images/greenGarden.jpg");
+		
 		this.skyAppearance = new CGFappearance(this);
 		this.skyAppearance.loadTexture("../resources/images/blue.png");
 		//this.skyAppearance.setTextureWrap('REPEAT','REPEAT');
@@ -232,7 +235,7 @@ class LightingScene extends CGFscene
 		this.pushMatrix();
 		this.rotate(-90*Math.PI/180.0,1,0,0);
 		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);	
-		this.skyAppearance.apply();
+		this.gardenAppearance.apply();
 		this.terrain.display();
 		this.popMatrix();
 		};
