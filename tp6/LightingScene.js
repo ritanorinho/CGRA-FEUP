@@ -25,7 +25,7 @@ class LightingScene extends CGFscene
 		this.axisOn=true; 
 		//this.option2=false;
 
-		this.speed=3;
+		this.speed=1;
 		this.light0=true;
 		this.light1=true;
 		this.light2=true;
@@ -55,7 +55,7 @@ class LightingScene extends CGFscene
 		this.vehicleAppearances = new Array();
 		this.currVehicleAppearance = 0;
 
-		this.car = new MyVehicle (this);
+		this.car = new MyVehicle (this, this.speed);
 		this.terrain= new MyTerrain (this,8, this.altimetry);
 		this.crane = new MyCrane (this);
 
@@ -231,7 +231,7 @@ class LightingScene extends CGFscene
 		if (this.axisOn)	this.axis.display();
 
 		this.pushMatrix();
-		this.translate (0, 0.5, 2);
+//		this.translate (0, 0.5, 2);
 		this.vehicleAppearances[this.currVehicleAppearance].apply()
 		this.car.display();
 		this.popMatrix();
@@ -245,7 +245,7 @@ class LightingScene extends CGFscene
 		
 		this.pushMatrix();
 		this.metalTexture.apply();
-		this.crane.display();
+	//	this.crane.display();
 		this.popMatrix();
 
 		};
@@ -256,7 +256,7 @@ class LightingScene extends CGFscene
 	update (currentTime)
 	{
 		this.checkKeys();
-		this.car.update(currentTime, this.speed, this.wPress, this.sPress, this.aPress, this.dPress);
+		this.car.update(currentTime, this.wPress, this.sPress, this.aPress, this.dPress);
 		this.crane.update(currentTime);
 	}
 };

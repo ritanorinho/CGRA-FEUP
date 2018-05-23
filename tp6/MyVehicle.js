@@ -5,17 +5,21 @@
 
 class MyVehicle extends CGFobject 
 {
-	constructor(scene) 
+	constructor(scene, speed) 
 	{
 		super(scene);
 
-		this.x = 0;
-		this.z = 0;
+		this.x = 0.0;
+		this.z = 0.0;
 		this.angle = Math.PI / 2;
+		this.speed = speed;
 		this.rotationAngle = 0;
 		this.rotationWheels=0;
 		this.wheelRotation=0;
 		this.lastTime = 0;
+		this.init = 0;
+
+
 		this.bodyTexture = this.scene.carBlueTexture;
 
 		this.wheel = new MyCylinder (this.scene,20,20);
@@ -54,8 +58,8 @@ class MyVehicle extends CGFobject
 
     	this.scene.pushMatrix();
     	this.scene.translate (this.x,0,this.z);     
-		this.scene.rotate ((this.rotationAngle) * Math.PI/180,0,1,0);
-     	this.scene.translate (-this.x,0,-this.z);
+		this.scene.rotate (this.rotationAngle * Math.PI/180,0,1,0);
+	   	this.scene.translate (-this.x,0,-this.z);
 
         //body
         this.scene.pushMatrix();
@@ -78,7 +82,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
         this.scene.translate (this.x+0.75,0,this.z-1.25);
-      	this.scene.rotate(this.rotationWheels*Math.PI/180,1,0,0);
+      	this.scene.rotate(this.speed * this.rotationWheels*Math.PI/180,1,0,0);
       	this.scene.rotate( 90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
@@ -88,7 +92,7 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
 		this.scene.translate (this.x+0.75, 0, this.z-1.25);
-		this.scene.rotate(this.rotationWheels*Math.PI/180,1,0,0);
+		this.scene.rotate(this.speed * this.rotationWheels*Math.PI/180,1,0,0);
 		this.scene.rotate(90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
@@ -98,19 +102,18 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
         this.scene.translate (this.x+0.75,0, this.z+1.25);
-      	this.scene.rotate(this.rotationWheels*Math.PI/180,1,0,0);
-      	this.scene.rotate((this.wheelRotation+90) * Math.PI/180.0,0,1,0);
-      
-      	this.scene.scale (0.5,0.5,0.5);
+      	this.scene.rotate((this.wheelRotation+90) * Math.PI/180.0,0,1,0);   
+       	this.scene.rotate(this.speed * this.rotationWheels*Math.PI/180,0,0,1); 
+    	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
 
 		//jante dianteira esquerda
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
-		this.scene.translate (this.x+0.75, 0, this.z+1.25);
-		this.scene.rotate(this.rotationWheels*Math.PI/180,1,0,0);
-		this.scene.rotate ((this.wheelRotation+90) * Math.PI/180.0,0,1,0);
+	 	this.scene.translate (this.x+0.75, 0, this.z+1.25);
+	 	this.scene.rotate ((this.wheelRotation+90) * Math.PI/180.0,0,1,0);
+	 	this.scene.rotate(this.speed * this.rotationWheels*Math.PI/180,0,0,1);      	
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
@@ -120,6 +123,7 @@ class MyVehicle extends CGFobject
         this.scene.wheelTexture.apply();
         this.scene.translate (this.x-0.75,0, this.z+1.25);
       	this.scene.rotate((this.wheelRotation-90) * Math.PI/180.0,0,1,0);
+     	this.scene.rotate(this.speed * -this.rotationWheels*Math.PI/180,0,0,1);      	
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
@@ -128,8 +132,8 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
 		this.scene.translate (this.x-0.75, 0, this.z+1.25);
-		this.scene.rotate(this.rotationWheels*Math.PI/180,1,0,0);
-		this.scene.rotate((this.wheelRotation-90) * Math.PI/180.0,0,1,0);
+		this.scene.rotate(( this.wheelRotation-90) * Math.PI/180.0,0,1,0);
+	 	this.scene.rotate(this.speed *-this.rotationWheels*Math.PI/180,0,0,1);      	
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
         this.scene.popMatrix();
@@ -138,17 +142,17 @@ class MyVehicle extends CGFobject
         this.scene.pushMatrix();
         this.scene.wheelTexture.apply();
         this.scene.translate (this.x-0.75,0,this.z-1.25);
-        this.scene.rotate(this.rotationWheels*Math.PI/180,1,0,0);
+        this.scene.rotate(this.speed * this.rotationWheels*Math.PI/180,1,0,0);
       	this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.wheel.display();
         this.scene.popMatrix();
 
-       	//jante traseira esquerda
+       	//jante traseira direita
         this.scene.pushMatrix();
 		this.scene.rimTexture.apply();
 		this.scene.translate (this.x-0.75, 0, this.z-1.25);
-		this.scene.rotate(this.rotationWheels*Math.PI/180,1,0,0);
+		this.scene.rotate(this.speed * this.rotationWheels*Math.PI/180,1,0,0);
 		this.scene.rotate(-90 * Math.PI/180.0,0,1,0);
       	this.scene.scale (0.5,0.5,0.5);
         this.rim.display();
@@ -162,15 +166,6 @@ class MyVehicle extends CGFobject
 		this.scene.mirrorTexture.apply();
 		this.frontMirror.display();
         this.scene.popMatrix();
-
-		//traseira
-/*		this.scene.pushMatrix();
-        this.scene.translate (0, 0.1,-1.75);
-        this.scene.rotate(180 * Math.PI/180.0,0,1,0);
-        this.scene.scale (1.5, 0.8, 0.5); 
-        this.scene.bodyTexture.apply();
-        this.back.display();
-        this.scene.popMatrix();*/
 
 		//farol esquerdo
         this.scene.pushMatrix();
@@ -204,27 +199,19 @@ class MyVehicle extends CGFobject
 		return this.z;
 	}
 
-    update(currTime, speed, wPress, sPress, aPress, dPress)
+    update(currTime, wPress, sPress, aPress, dPress)
     {
 		var diff = (currTime - this.lastTime)/1000;
 		this.lastTime = currTime;
 		this.rotationWheels+=5;
+		
 		if (wPress)
-		{
-			this.z = this.z + diff * speed * Math.sin((90 - this.rotationAngle) * Math.PI/180);
-			this.x = this.x + diff * speed * Math.cos((90 - this.rotationAngle) * Math.PI/180); 
-			this.rotationAngle +=this.wheelRotation/20;
-		}
+			this.speed += 0.1;
 
 		if (sPress)
-		{
-			this.z = this.z - diff * speed * Math.sin ((90 - this.rotationAngle) * Math.PI/180);
-			this.x = this.x - diff * speed * Math.cos ((90 - this.rotationAngle) * Math.PI/180);
-			this.rotationAngle -=this.wheelRotation/20;
-		
-		}
+			this.speed -= 0.1;
 
-		if ((wPress || sPress) && aPress)
+/*		if ((wPress || sPress) && aPress)
 		{
 			this.rotationAngle += 5;
 			this.wheelRotation=0;
@@ -236,13 +223,13 @@ class MyVehicle extends CGFobject
 			this.rotationAngle -= 5;
 			this.wheelRotation=0;
 		}
-
-		if (aPress && !(wPress || sPress) && this.wheelRotation<45 && this.wheelRotation>= -45)
+*/
+		if (aPress && this.wheelRotation<45 && this.wheelRotation>= -45)
 		{
 			this.wheelRotation+=5;
 		}
 		
-		if (dPress && !(wPress || sPress)){
+		else if (dPress){
 				
 			if( this.wheelRotation<=45 && this.wheelRotation> -45)
 			{
@@ -251,10 +238,44 @@ class MyVehicle extends CGFobject
 			}
 		
 		}
+
+		else
+		{
+			if (this.wheelRotation > 0)
+				this.wheelRotation -= 5;
+			if (this.wheelRotation < 0)
+				this.wheelRotation += 5;
+		}
+
+		if (this.init != 0)
+		{
+			if (this.speed >= 0.1)
+			{
+				this.z += diff * this.speed * Math.sin((90 - this.rotationAngle) * Math.PI/180);
+				this.x += diff * this.speed * Math.cos((90 - this.rotationAngle) * Math.PI/180); 
+				this.rotationAngle += this.wheelRotation/10;
+			}
+			
+			else if (this.speed <= -0.1)
+			{
+				this.z += diff * this.speed * Math.sin((90 - this.rotationAngle) * Math.PI/180);
+				this.x += diff * this.speed * Math.cos((90 - this.rotationAngle) * Math.PI/180); 
+				this.rotationAngle += this.wheelRotation/10;
+			}
+
+			else
+			{
+
+
+			}
+		} 
+
+		this.init++;
     }
 
     setTexture (newTexture)
     {
     	this.bodyTexture = newTexture;
     }
+
     };
