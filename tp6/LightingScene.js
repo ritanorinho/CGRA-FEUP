@@ -192,20 +192,22 @@ class LightingScene extends CGFscene
 		this.sPress = false;
 		this.aPress = false;
 		this.dPress = false;
+
 	if (this.gui.isKeyPressed("KeyW"))
-	{
-		this.wPress = true;
-	}
+		this.car.accelerate();
+
 	if (this.gui.isKeyPressed("KeyS"))
-	{
-		this.sPress = true;
-	}
+		this.car.decelerate();
+	
 	if (this.gui.isKeyPressed("KeyA"))
-	{
-		this.aPress = true;
-	}
+		this.car.rotateLeft();
+
 	if (this.gui.isKeyPressed("KeyD"))
-		this.dPress=true;
+		this.car.rotateRight();
+
+	if (!this.gui.isKeyPressed("KeyD") &&
+		!this.gui.isKeyPressed("KeyA"))
+		this.car.stabilize();
 	}
 
 
@@ -256,7 +258,7 @@ class LightingScene extends CGFscene
 	update (currentTime)
 	{
 		this.checkKeys();
-		this.car.update(currentTime, this.wPress, this.sPress, this.aPress, this.dPress);
+		this.car.update(currentTime);
 		this.crane.update(currentTime);
 	}
 };

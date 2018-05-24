@@ -203,75 +203,50 @@ class MyVehicle extends CGFobject
     {
 		var diff = (currTime - this.lastTime)/1000;
 		this.lastTime = currTime;
-		this.rotationWheels+=5;
-		
-		if (wPress)
-			this.speed += 0.1;
 
-		if (sPress)
-			this.speed -= 0.1;
-
-/*		if ((wPress || sPress) && aPress)
-		{
-			this.rotationAngle += 5;
-			this.wheelRotation=0;
-			this.angle -= Math.PI/20;
-		}
-
-		if ((wPress || sPress) &&  dPress)
-		{
-			this.rotationAngle -= 5;
-			this.wheelRotation=0;
-		}
-*/
-		if (aPress && this.wheelRotation<45 && this.wheelRotation>= -45)
-		{
-			this.wheelRotation+=5;
-		}
-		
-		else if (dPress){
-				
-			if( this.wheelRotation<=45 && this.wheelRotation> -45)
-			{
-
-				this.wheelRotation-=5;
-			}
-		
-		}
-
-		else
-		{
-			if (this.wheelRotation > 0)
-				this.wheelRotation -= 5;
-			if (this.wheelRotation < 0)
-				this.wheelRotation += 5;
-		}
 
 		if (this.init != 0)
 		{
-			if (this.speed >= 0.1)
-			{
 				this.z += diff * this.speed * Math.sin((90 - this.rotationAngle) * Math.PI/180);
 				this.x += diff * this.speed * Math.cos((90 - this.rotationAngle) * Math.PI/180); 
-				this.rotationAngle += this.wheelRotation/10;
-			}
-			
-			else if (this.speed <= -0.1)
-			{
-				this.z += diff * this.speed * Math.sin((90 - this.rotationAngle) * Math.PI/180);
-				this.x += diff * this.speed * Math.cos((90 - this.rotationAngle) * Math.PI/180); 
-				this.rotationAngle += this.wheelRotation/10;
-			}
-
-			else
-			{
-
-
-			}
+				this.rotationAngle += this.speed * this.wheelRotation/10;
 		} 
 
-		this.init++;
+		else
+			this.init++;
     }
+	
+	accelerate ()
+	{
+		this.speed += 0.1; 
+	}
+
+	decelerate()
+	{
+		this.speed -= 0.1;
+	}
+
+	rotateLeft()
+	{
+		if (this.wheelRotation<45 && this.wheelRotation>= -45)
+			this.wheelRotation+=5;
+
+	}
+
+	rotateRight()
+	{
+		if( this.wheelRotation<=45 && this.wheelRotation> -45)
+				this.wheelRotation-=5;
+	}
+
+	stabilize()
+	{
+		if (this.wheelRotation > 0)
+			this.wheelRotation -= 5;
+		
+		if (this.wheelRotation < 0)
+			this.wheelRotation += 5;
+	}
 
     setTexture (newTexture)
     {
