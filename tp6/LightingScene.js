@@ -247,7 +247,7 @@ class LightingScene extends CGFscene
 		
 		this.pushMatrix();
 		this.metalTexture.apply();
-	//	this.crane.display();
+		this.crane.display();
 		this.popMatrix();
 
 		};
@@ -259,6 +259,11 @@ class LightingScene extends CGFscene
 	{
 		this.checkKeys();
 		this.car.update(currentTime);
-		this.crane.update(currentTime);
+		if (this.car.getZ() > 9 && this.car.getZ() < 10
+			&& this.car.getX() > 0 && this.car.getX() < 1 )										
+		{
+			//this.crane.update(currentTime);
+			this.car.setSpeed (0);
+		}
 	}
 };

@@ -9,10 +9,15 @@ class MyCrane extends CGFobject
 	constructor(scene) 
 	{
 		super(scene);
-
+		this.k=0;
         this.angle = 0;
         this.lastTime = 0;
 		this.direction=1;
+		this.imanHeight = 0;
+		this.imanZ = 0;
+		this.armAngle = 0;
+		this.hasCar = 0;
+
         this.base = new MyCylinderWithDiscs(this.scene);    
         this.arm = new MyCylinderWithDiscs(this.scene); 
 	    this.joint = new MyCylinderWithDiscs(this.scene);
@@ -23,8 +28,10 @@ class MyCrane extends CGFobject
 	display() 
 	{
 	    this.scene.pushMatrix();
+		this.scene.rotate( 180 * Math.PI/180.0,0,1,0);
 
         this.scene.rotate (this.angle * Math.PI/180,0,1,0);
+	    
 	    //base
 	    this.scene.pushMatrix();
 		this.base.display();
@@ -49,21 +56,21 @@ class MyCrane extends CGFobject
         //braço 2
 		this.scene.pushMatrix();
 		this.scene.translate (0, Math.sin(Math.PI/4)*7.5,0.25 + Math.cos(Math.PI/4)*7.5);
-		this.scene.rotate( -45 * Math.PI/180.0,1,0,0);
-		this.scene.scale(0.5,7.5,0.5);
+		this.scene.rotate( (-80 + this.armAngle) * Math.PI/180.0,1,0,0);
+		this.scene.scale(0.5,8,0.5);
 		this.arm.display();
 		this.scene.popMatrix();
 
         //wire
 		this.scene.pushMatrix();
-	    this.scene.translate (0,2.65, 0.25 + Math.cos(Math.PI/4)*3.75 + Math.cos(Math.PI/4)*7.5);		
-	    this.scene.scale(0.1,1.8,0.1);
+	    this.scene.translate (0, 4.9 - this.imanHeight, 0.3 + Math.sin(4*Math.PI/9)*3.75 + Math.cos(Math.PI/4)*7.5 - this.imanZ);		
+	    this.scene.scale(0.1,2.4,0.1);
 		this.wire.display();
 		this.scene.popMatrix();
 
 		//iman
 	    this.scene.pushMatrix();
-	    this.scene.translate (0,1.75, 0.25 + Math.cos(Math.PI/4)*3.75 + Math.cos(Math.PI/4)*7.5);
+	    this.scene.translate (0, 3.7 - this.imanHeight, 0.25 + Math.sin(4*Math.PI/9)*3.75 + Math.cos(Math.PI/4)*7.5 - this.imanZ);
         this.scene.scale(1.5,0.5,1.5);
 		this.arm.display();
 		this.scene.popMatrix();
@@ -76,15 +83,41 @@ class MyCrane extends CGFobject
 	    var diff = (currTime - this.lastTime)/1000;
 	    this.lastTime = currTime;
             
-            
-           
-            if (this.angle ==180){
-            	this.direction=-1;
+            if (this.angle %180==0 && this.angle>=180){
+            	this.direction=0;
+            	this.k++;
             }
-            if (this.angle==0)
+            if (this.angle==0){
             	this.direction=1;
+            	this.k--;
+            }
+
+            if (this.direction == 0 && this.hasCar == 0 && this.imanHeight < 2.5)
+            {
+            	this.imanHeight += 2.5/7;
+            	this.imanZ += 1/7;
+            	this.armAngle += 5;
+            }
+
+			if (this.imanHeight >= 2.5)
+			  	this.hasCar = 1;
+
+            if (this.hasCar == 1 && this.imanHeight > 0)
+            {
+     			console.log (this.imanHeight);
+            	this.imanHeight -= 2.5/7;
+            	this.imanZ -= 1/7;
+            	this.armAngle -= 5;
+            }
+
+            if (this.hasCar == 1 && this.imanHeight <= 0)
+            {
+            	console.log ("Entrou");
+				this.direction = 1;
+            }
+console.log (this.angle + "k: " + this.k);
         //   this.angle += this.direction * diff * 30;
-        this.angle+=this.direction*3;
+        	this.angle += this.direction*3;
 	}
 	
 };

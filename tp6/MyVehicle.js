@@ -10,7 +10,7 @@ class MyVehicle extends CGFobject
 		super(scene);
 
 		this.x = 0.0;
-		this.z = 0.0;
+		this.z = 5.0;
 		this.angle = Math.PI / 2;
 		this.speed = speed;
 		this.rotationAngle = 0;
@@ -204,7 +204,6 @@ class MyVehicle extends CGFobject
 		var diff = (currTime - this.lastTime)/1000;
 		this.lastTime = currTime;
 
-
 		if (this.init != 0)
 		{
 				this.z += diff * this.speed * Math.sin((90 - this.rotationAngle) * Math.PI/180);
@@ -246,6 +245,11 @@ class MyVehicle extends CGFobject
 		
 		if (this.wheelRotation < 0)
 			this.wheelRotation += 5;
+	}
+	
+	setSpeed (newSpeed)
+	{
+		this.speed = newSpeed;
 	}
 
     setTexture (newTexture)
