@@ -14,7 +14,7 @@ class Plane extends CGFobject{
 		nrDivs = typeof nrDivs !== 'undefined' ? nrDivs : 1;
 
 		this.nrDivs = nrDivs;
-		this.patchLength = 7.0 / nrDivs;
+		this.patchLength = 10.0 / nrDivs;
 
 		this.initBuffers();
 	};

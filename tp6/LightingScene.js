@@ -242,7 +242,7 @@ class LightingScene extends CGFscene
 		this.rotate(-90*Math.PI/180.0,1,0,0);
 		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);	
 		this.gardenAppearance.apply();
-//		this.terrain.display();
+		this.terrain.display();
 		this.popMatrix();
 		
 		this.pushMatrix();
@@ -262,8 +262,15 @@ class LightingScene extends CGFscene
 		if (this.car.getZ() > 9 && this.car.getZ() < 10
 			&& this.car.getX() > 0 && this.car.getX() < 1 )										
 		{
-			//this.crane.update(currentTime);
+			this.crane.update(currentTime);
 			this.car.setSpeed (0);
+		}
+		if (this.crane.hasCar){
+			this.car.setCarHeight(2.5-this.crane.getImanHeight());
+			this.car.setCraneAngle(this.crane.getAngle()-180);
+		}
+		if (this.crane.finish && this.car.getHeight() > 0.1 ){
+			this.car.setCarHeight(this.car.getHeight()-0.5);
 		}
 	}
 };

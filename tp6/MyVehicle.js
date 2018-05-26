@@ -11,11 +11,13 @@ class MyVehicle extends CGFobject
 
 		this.x = 0.0;
 		this.z = 5.0;
+		this.carHeight=0;
 		this.angle = Math.PI / 2;
 		this.speed = speed;
 		this.rotationAngle = 0;
 		this.rotationWheels=0;
 		this.wheelRotation=0;
+		this.craneRotation=0;
 		this.lastTime = 0;
 		this.init = 0;
 
@@ -57,7 +59,8 @@ class MyVehicle extends CGFobject
 
 
     	this.scene.pushMatrix();
-    	this.scene.translate (this.x,0,this.z);     
+    	this.scene.rotate(this.craneRotation*Math.PI/180.0,0,1,0);	
+    	this.scene.translate (this.x,0+this.carHeight,this.z);     
 		this.scene.rotate (this.rotationAngle * Math.PI/180,0,1,0);
 	   	this.scene.translate (-this.x,0,-this.z);
 
@@ -184,7 +187,8 @@ class MyVehicle extends CGFobject
         this.scene.stopLampTexture.apply();
         this.stopLamp.display();
         this.scene.popMatrix();
-		
+
+			
 		this.scene.popMatrix();
         
     };
@@ -198,7 +202,13 @@ class MyVehicle extends CGFobject
 	{
 		return this.z;
 	}
-
+	getCraneAngle()
+	{
+		return this.craneRotation;
+	}
+	getHeight(){
+		return this.carHeight;
+	}
     update(currTime, wPress, sPress, aPress, dPress)
     {
 		var diff = (currTime - this.lastTime)/1000;
@@ -236,6 +246,18 @@ class MyVehicle extends CGFobject
 	{
 		if( this.wheelRotation<=45 && this.wheelRotation> -45)
 				this.wheelRotation-=5;
+	}
+	setRotationAngle(angle)
+	{
+		this.rotationAngle=angle;
+	}
+	setCraneAngle(angle)
+	{
+		this.craneRotation=angle;
+	}
+	setCarHeight(y)
+	{
+		this.carHeight=y;
 	}
 
 	stabilize()

@@ -9,7 +9,6 @@ class MyCrane extends CGFobject
 	constructor(scene) 
 	{
 		super(scene);
-		this.k=0;
         this.angle = 0;
         this.lastTime = 0;
 		this.direction=1;
@@ -17,6 +16,7 @@ class MyCrane extends CGFobject
 		this.imanZ = 0;
 		this.armAngle = 0;
 		this.hasCar = 0;
+		this.finish=false;
 
         this.base = new MyCylinderWithDiscs(this.scene);    
         this.arm = new MyCylinderWithDiscs(this.scene); 
@@ -77,22 +77,27 @@ class MyCrane extends CGFobject
 
 		this.scene.popMatrix();
 	}
-
+	getAngle(){
+		return this.angle;
+	}
+	getImanHeight(){
+		return this.imanHeight;
+	}
 	update (currTime)
 	{
 	    var diff = (currTime - this.lastTime)/1000;
 	    this.lastTime = currTime;
             
-            if (this.angle %180==0 && this.angle>=180){
+            if ((this.angle %180)==0 && this.angle != 0){
             	this.direction=0;
-            	this.k++;
             }
-            if (this.angle==0){
-            	this.direction=1;
-            	this.k--;
+            if (this.angle==0 && this.hasCar==1){
+            	this.direction=0;
+            	this.finish=true;
+            	this.hasCar=0;
             }
 
-            if (this.direction == 0 && this.hasCar == 0 && this.imanHeight < 2.5)
+            if (this.direction == 0 && this.hasCar == 0 && this.imanHeight < 2.5 && this.angle==180)
             {
             	this.imanHeight += 2.5/7;
             	this.imanZ += 1/7;
@@ -104,20 +109,18 @@ class MyCrane extends CGFobject
 
             if (this.hasCar == 1 && this.imanHeight > 0)
             {
-     			console.log (this.imanHeight);
             	this.imanHeight -= 2.5/7;
             	this.imanZ -= 1/7;
             	this.armAngle -= 5;
             }
 
-            if (this.hasCar == 1 && this.imanHeight <= 0)
+            if (this.hasCar == 1 && this.imanHeight <= 0 && this.angle >0)
             {
-            	console.log ("Entrou");
-				this.direction = 1;
+            
+				this.direction = -1;
             }
-console.log (this.angle + "k: " + this.k);
         //   this.angle += this.direction * diff * 30;
-        	this.angle += this.direction*3;
+        	this.angle += this.direction*6;
 	}
 	
 };
