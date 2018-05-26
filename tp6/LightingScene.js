@@ -230,10 +230,10 @@ class LightingScene extends CGFscene
 		// // Update all lights used
 			this.updateLights();
 		// Draw axis
-		if (this.axisOn)	this.axis.display();
+//		if (this.axisOn)	this.axis.display();
 
 		this.pushMatrix();
-//		this.translate (0, 0.5, 2);
+		this.translate (-30, 0.5, -15);
 		this.vehicleAppearances[this.currVehicleAppearance].apply()
 		this.car.display();
 		this.popMatrix();
@@ -246,6 +246,7 @@ class LightingScene extends CGFscene
 		this.popMatrix();
 		
 		this.pushMatrix();
+		this.translate (-30, 0.5, -15);
 		this.metalTexture.apply();
 		this.crane.display();
 		this.popMatrix();
@@ -272,5 +273,7 @@ class LightingScene extends CGFscene
 		if (this.crane.finish && this.car.getHeight() > 0.1 ){
 			this.car.setCarHeight(this.car.getHeight()-0.5);
 		}
+
+
 	}
 };

@@ -14,7 +14,7 @@ class Plane extends CGFobject{
 		nrDivs = typeof nrDivs !== 'undefined' ? nrDivs : 1;
 
 		this.nrDivs = nrDivs;
-		this.patchLength = 10.0 / nrDivs;
+		this.patchLength = 15.0 / nrDivs;
 
 		this.initBuffers();
 	};
@@ -46,11 +46,11 @@ class Plane extends CGFobject{
 		var deltaS = (this.maxS - this.minS) / this.nrDivs;
 		var deltaT = (this.maxT - this.minT) / this.nrDivs;
 		
-		var yCoord = 0.5;
+		var yCoord = 7.5;
 
 		for (var j = 0; j <= this.nrDivs; j++) 
 		{
-			var xCoord = -0.5;
+			var xCoord = -7.5;
 			for (var i = 0; i <= this.nrDivs; i++) 
 			{
 				this.vertices.push(xCoord, yCoord, 0);
